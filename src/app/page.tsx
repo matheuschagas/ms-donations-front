@@ -15,7 +15,7 @@ const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 const Page = () => {
 	const [locationFeature, setLocationFeature] = useState(true);
 	const [locationGranted, setLocationGranted] = useState(false);
-	const [location, setLocation] = useState();
+	const [location, setLocation] = useState<GeolocationPosition | undefined>();
 
 	useEffect(() => {
 		if (navigator.geolocation) {
@@ -31,7 +31,7 @@ const Page = () => {
 	};
 
 	const handlePosition = (position: GeolocationPosition) => {
-		console.log(position);
+		setLocation(position);
 	};
 	const handleGetHelp = () => {
 		//get location
