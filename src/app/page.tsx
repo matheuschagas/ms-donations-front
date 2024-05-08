@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchDonations } from '@/queries/donations';
 import { DonationType, DonationTypeValues } from '@/models/donation';
@@ -28,16 +28,15 @@ const formSchema = z.object({
 	lat: z.string().min(2).max(50),
 	long: z.string().min(2).max(50),
 });
-
+const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
+	ssr: false, // This will only render on the client-side
+});
 const Page = () => {
 	const [locationFeature, setLocationFeature] = useState(true);
 	const [locationGranted, setLocationGranted] = useState(false);
 	const [location, setLocation] = useState<GeolocationPosition | undefined>();
 	const [donationType, setDonationType] = useState<DonationType | undefined>();
 	const [wannaHelpModalVisible, setWannaHelpModalVisible] = useState(false);
-	const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
-		ssr: false, // This will only render on the client-side
-	});
 
 	const { data } = useQuery({
 		queryKey: ['donations', location, donationType],
@@ -107,7 +106,13 @@ const Page = () => {
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>Sair</AlertDialogCancel>
+						<AlertDialogCancel
+							onClick={() => {
+								setWannaHelpModalVisible(false);
+							}}
+						>
+							Sair
+						</AlertDialogCancel>
 						<AlertDialogAction>Continuar</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
