@@ -11,7 +11,7 @@ export const fetchDonations = async ({
 	if (!location || !donationType) return null;
 	const response = await fetch(
 		urlBuilder({
-			path: `donations?lat=${location.coords.latitude}&long=${location.coords.longitude}`,
+			path: `donations?lat=${location.coords.latitude}&long=${location.coords.longitude}&type=${donationType}`,
 		}),
 	);
 	return await response.json();

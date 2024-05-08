@@ -31,7 +31,6 @@ export default function RootLayout({
 				)}
 			>
 				<ReactQueryProvider>
-					<Header />
 					<Container>{children}</Container>
 				</ReactQueryProvider>
 			</body>

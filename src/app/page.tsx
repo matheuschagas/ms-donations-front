@@ -24,6 +24,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+import { Header } from '@/components/Header';
 const formSchema = z.object({
 	lat: z.string().min(2).max(50),
 	long: z.string().min(2).max(50),
@@ -71,8 +72,18 @@ const Page = () => {
 	const handleHelp = () => {
 		setWannaHelpModalVisible(true);
 	};
+
+	const handleOnDonationType = (donationType: string) => {
+		setDonationType(donationType as DonationType);
+		setWannaHelpModalVisible(false);
+	};
 	return (
 		<>
+			<Header
+				location={location}
+				donationType={donationType}
+				donationsLength={data?.length}
+			/>
 			<section className="flex h-[calc(100vh-52px)] w-full flex-col items-center justify-center">
 				<MapComponentWithNoSSR location={location} />
 				<div className="fixed bottom-5 left-0 z-10 flex w-full flex-col items-center justify-center gap-4 p-4 sm:flex-row">
@@ -89,7 +100,7 @@ const Page = () => {
 					<AlertDialogHeader>
 						<AlertDialogTitle>Como você pode ajudar?</AlertDialogTitle>
 						<AlertDialogDescription>
-							<Select>
+							<Select onValueChange={handleOnDonationType}>
 								<SelectTrigger className="w-full max-w-xl">
 									<SelectValue placeholder="Doação" />
 								</SelectTrigger>
@@ -113,7 +124,6 @@ const Page = () => {
 						>
 							Sair
 						</AlertDialogCancel>
-						<AlertDialogAction>Continuar</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
