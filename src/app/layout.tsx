@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { ReactQueryProvider } from '@/app/query-provider';
 import { Header } from '@/components/Header';
 import { Container } from '@/components/Container';
+import 'leaflet/dist/leaflet.css';
 
 const fontSans = FontSans({
 	subsets: ['latin'],
