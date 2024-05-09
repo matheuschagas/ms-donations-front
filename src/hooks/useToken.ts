@@ -1,11 +1,14 @@
-'use client';
-import { useLocalStorage } from '@uidotdev/usehooks';
+import { useLocalStorage } from 'usehooks-ts';
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { createToken } from '@/queries/tokens';
 
 export const useToken = () => {
-	const [tokenLocalStorage, setTokenLocalStorage] = useLocalStorage<string | null>('token', null);
+	const [tokenLocalStorage, setTokenLocalStorage] = useLocalStorage<string | null>(
+		'token',
+		null,
+		{ initializeWithValue: false },
+	);
 
 	const { data: token, isLoading } = useQuery({
 		queryKey: ['token'],
