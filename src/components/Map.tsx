@@ -26,7 +26,10 @@ const Map = ({ location, donations }: MapProps) => {
 			{/*	<Marker position={[location.coords.latitude, location.coords.longitude]} />*/}
 			{/*) : null}*/}
 			{donations?.map((donation, index) => (
-				<Marker key={index} position={[parseInt(donation.lat), parseInt(donation.long)]}>
+				<Marker
+					key={index}
+					position={[parseFloat(donation.lat), parseFloat(donation.long)]}
+				>
 					<Popup>
 						{donation.types?.map((donation) => DonationTypeValues[donation]).join(', ')}
 						<br />
