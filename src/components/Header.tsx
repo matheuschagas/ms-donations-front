@@ -37,7 +37,7 @@ export const Header = ({ location, donationType, donationsLength }: HeaderProps)
 			)}
 			<Dialog>
 				<DialogTrigger asChild>
-					<h2 className="text-sm">Faça uma sugestão</h2>
+					<h2 className="cursor-pointer text-sm">Faça uma sugestão</h2>
 				</DialogTrigger>
 				<DialogContent className="sm:max-w-md">
 					<DialogHeader>
@@ -48,7 +48,7 @@ export const Header = ({ location, donationType, donationsLength }: HeaderProps)
 					<DialogFooter className="sm:justify-start">
 						<DialogClose asChild>
 							<Button type="button" variant="secondary">
-								Close
+								Fechar
 							</Button>
 						</DialogClose>
 					</DialogFooter>
