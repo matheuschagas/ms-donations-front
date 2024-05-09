@@ -4,24 +4,19 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchDonations } from '@/queries/donations';
-import { DonationType, DonationTypeValues } from '@/models/donation';
-import {
-	AlertDialog,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
+import { DonationType } from '@/models/donation';
 import { Header } from '@/components/Header';
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog';
+import { HelpForm } from '@/components/HelpForm';
 const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 	ssr: false, // This will only render on the client-side
 });
@@ -85,38 +80,15 @@ const Page = () => {
 					</Button>
 				</div>
 			</section>
-			<AlertDialog open={wannaHelpModalVisible}>
-				<AlertDialogContent>
-					<AlertDialogHeader>
-						<AlertDialogTitle>Como você pode ajudar?</AlertDialogTitle>
-						<AlertDialogDescription>
-							<Select onValueChange={handleOnDonationType}>
-								<SelectTrigger className="w-full max-w-xl">
-									<SelectValue placeholder="Doação" />
-								</SelectTrigger>
-								<SelectContent>
-									{Object.keys(DonationType).map((item, index) => {
-										return (
-											<SelectItem key={item} value={item}>
-												{DonationTypeValues[item as DonationType]}
-											</SelectItem>
-										);
-									})}
-								</SelectContent>
-							</Select>
-						</AlertDialogDescription>
-					</AlertDialogHeader>
-					<AlertDialogFooter>
-						<AlertDialogCancel
-							onClick={() => {
-								setWannaHelpModalVisible(false);
-							}}
-						>
-							Sair
-						</AlertDialogCancel>
-					</AlertDialogFooter>
-				</AlertDialogContent>
-			</AlertDialog>
+			<Dialog open={wannaHelpModalVisible}>
+				<DialogContent className="sm:max-w-md">
+					<DialogHeader>
+						<DialogTitle>Sugestões</DialogTitle>
+						<DialogDescription>Compartilhe suas ideias conosco.</DialogDescription>
+					</DialogHeader>
+					<HelpForm />
+				</DialogContent>
+			</Dialog>
 		</>
 	);
 };
