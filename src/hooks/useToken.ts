@@ -1,3 +1,4 @@
+'use client';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
