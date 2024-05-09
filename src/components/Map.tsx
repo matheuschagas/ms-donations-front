@@ -23,9 +23,7 @@ const Map = ({ location, donations }: MapProps) => {
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			{location ? (
-				<Marker position={[location.coords.latitude, location.coords.longitude]}>
-					<Popup>Arraste para melhorar a precisão</Popup>
-				</Marker>
+				<Marker position={[location.coords.latitude, location.coords.longitude]} />
 			) : null}
 			{donations?.map((donation, index) => (
 				<Marker key={index} position={[parseInt(donation.lat), parseInt(donation.long)]}>
