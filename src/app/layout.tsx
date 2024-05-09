@@ -3,9 +3,9 @@ import { Inter as FontSans } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { ReactQueryProvider } from '@/app/query-provider';
-import { Header } from '@/components/Header';
 import { Container } from '@/components/Container';
 import 'leaflet/dist/leaflet.css';
+import { Toaster } from '@/components/ui/toaster';
 
 const fontSans = FontSans({
 	subsets: ['latin'],
@@ -33,6 +33,7 @@ export default function RootLayout({
 				<ReactQueryProvider>
 					<Container>{children}</Container>
 				</ReactQueryProvider>
+				<Toaster />
 			</body>
 		</html>
 	);

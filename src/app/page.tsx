@@ -1,21 +1,18 @@
 'use client';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
-import { z } from 'zod';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchDonations } from '@/queries/donations';
 import { DonationType, DonationTypeValues } from '@/models/donation';
 import {
 	AlertDialog,
-	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogContent,
 	AlertDialogDescription,
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
-	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import {
 	Select,
@@ -25,19 +22,15 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Header } from '@/components/Header';
-const formSchema = z.object({
-	lat: z.string().min(2).max(50),
-	long: z.string().min(2).max(50),
-});
 const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 	ssr: false, // This will only render on the client-side
 });
 const Page = () => {
 	const [locationFeature, setLocationFeature] = useState(true);
-	const [locationGranted, setLocationGranted] = useState(false);
 	const [location, setLocation] = useState<GeolocationPosition | undefined>();
 	const [donationType, setDonationType] = useState<DonationType | undefined>();
 	const [wannaHelpModalVisible, setWannaHelpModalVisible] = useState(false);
+	const [getHelpModalVisible, setGetHelpModalVisible] = useState(false);
 
 	const { data } = useQuery({
 		queryKey: ['donations', location, donationType],
@@ -46,7 +39,6 @@ const Page = () => {
 
 	useEffect(() => {
 		if (navigator.geolocation) {
-			setLocationGranted(true);
 			navigator.geolocation.getCurrentPosition(handlePosition, handlePositionError);
 		} else {
 			setLocationFeature(false);
@@ -57,15 +49,13 @@ const Page = () => {
 		console.log(data);
 	}, [data]);
 
-	const handlePositionError = () => {
-		setLocationGranted(false);
-	};
+	const handlePositionError = () => {};
 
 	const handlePosition = (position: GeolocationPosition) => {
 		setLocation(position);
 	};
 	const handleGetHelp = () => {
-		if (locationFeature && locationGranted) {
+		if (locationFeature) {
 		} else {
 		}
 	};

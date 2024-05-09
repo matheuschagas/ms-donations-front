@@ -1,8 +1,8 @@
-import { Donation } from '@/models/donation';
+import { Donation, DonationType } from '@/models/donation';
 import { urlBuilder } from '@/lib/urlBuilder';
 
 interface fetchDonationParams {
-	queryKey: any[];
+	queryKey: [string, GeolocationPosition, DonationType];
 }
 export const fetchDonations = async ({
 	queryKey,
@@ -12,12 +12,13 @@ export const fetchDonations = async ({
 	const response = await fetch(
 		urlBuilder({
 			path: `donations?lat=${location.coords.latitude}&long=${location.coords.longitude}&type=${donationType}`,
+			subdomain: 'donations',
 		}),
 	);
 	return await response.json();
 };
 
 export const addDonation = (): Promise<Donation> =>
-	fetch(urlBuilder({ path: 'donations' }), { method: 'POST' }).then(
+	fetch(urlBuilder({ path: 'donations', subdomain: 'donations' }), { method: 'POST' }).then(
 		async (response) => await response.json(),
 	);
