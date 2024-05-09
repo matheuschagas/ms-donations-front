@@ -9,8 +9,14 @@ export const DonationTypeValues = {
 	[DonationType.FOOD]: 'Comida',
 	[DonationType.WATER]: 'Água',
 };
+
+interface Contact {
+	whatsapp: string;
+}
 export interface Donation {
 	lat: string;
 	long: string;
-	type: DonationType;
+	contact: Contact;
+	_id: string;
+	types: DonationType[];
 }
