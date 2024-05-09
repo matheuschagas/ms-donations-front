@@ -8,19 +8,18 @@ import { DonationType } from '@/models/donation';
 import { Header } from '@/components/Header';
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
-	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
 } from '@/components/ui/dialog';
 import { HelpForm } from '@/components/HelpForm';
+import { useToken } from '@/hooks/useToken';
 const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 	ssr: false, // This will only render on the client-side
 });
 const Page = () => {
+	const { token, loading } = useToken();
 	const [locationFeature, setLocationFeature] = useState(true);
 	const [location, setLocation] = useState<GeolocationPosition | undefined>();
 	const [donationType, setDonationType] = useState<DonationType | undefined>();
@@ -28,7 +27,7 @@ const Page = () => {
 	const [getHelpModalVisible, setGetHelpModalVisible] = useState(false);
 
 	const { data } = useQuery({
-		queryKey: ['donations', location, donationType],
+		queryKey: ['donations', location, donationType, token],
 		queryFn: fetchDonations,
 	});
 
