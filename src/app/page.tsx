@@ -62,6 +62,7 @@ const Page = () => {
 		const donation = await addDonation({
 			queryKey: ['donations', location, data.types, data.contact, token],
 		});
+		alert(JSON.stringify(donation));
 		if (donation) {
 			toast('Ajuda', 'Pedido de ajuda enviado com sucesso!');
 		} else {
