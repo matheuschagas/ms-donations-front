@@ -45,7 +45,7 @@ const Page = () => {
 	}, [data]);
 
 	const handlePositionError = (error: GeolocationPositionError) => {
-		alert(JSON.stringify(error));
+		alert(JSON.stringify(location));
 	};
 
 	const handlePosition = (position: GeolocationPosition) => {
