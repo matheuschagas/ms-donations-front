@@ -64,9 +64,9 @@ const Page = () => {
 		});
 		alert(JSON.stringify(donation));
 		if (donation) {
-			toast('Ajuda', 'Pedido de ajuda enviado com sucesso!');
+			toast({ title: 'Ajuda', description: 'Pedido de ajuda enviado com sucesso!' });
 		} else {
-			toast('Ajuda', 'Erro ao enviar pedido de ajuda');
+			toast({ title: 'Ajuda', description: 'Erro ao enviar pedido de ajuda' });
 		}
 	};
 	return (
