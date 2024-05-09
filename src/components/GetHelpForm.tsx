@@ -41,7 +41,7 @@ export function GetHelpForm({
 	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
 		await handleOnSubmit({
 			types: data.types as DonationType[],
-			contact: { whatsapp: data.whatsapp },
+			contact: { whatsapp: '+55' + data.whatsapp },
 		});
 	};
 
