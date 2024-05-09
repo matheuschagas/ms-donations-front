@@ -1,5 +1,3 @@
-'use client';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -20,7 +18,7 @@ const FormSchema = z.object({
 	type: z.enum(Object.values(DonationType) as unknown as readonly [string, ...string[]]),
 });
 
-export function HelpForm() {
+export function HelpForm({ handleOnSubmit }: { handleOnSubmit: (data: string) => any }) {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -29,7 +27,7 @@ export function HelpForm() {
 	});
 
 	function onSubmit(data: z.infer<typeof FormSchema>) {
-		console.log(data);
+		handleOnSubmit(data.type);
 	}
 
 	return (

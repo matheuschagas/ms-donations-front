@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
+import { DialogClose, DialogFooter } from '@/components/ui/dialog';
 
 const FormSchema = z.object({
 	description: z.string().min(3, {
@@ -54,7 +55,14 @@ export function SuggestionForm() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit">Enviar</Button>
+				<DialogFooter className="sm:justify-start">
+					<Button type="submit">Enviar</Button>
+					<DialogClose asChild>
+						<Button type="button" variant="secondary">
+							Fechar
+						</Button>
+					</DialogClose>
+				</DialogFooter>
 			</form>
 		</Form>
 	);

@@ -45,13 +45,6 @@ export const Header = ({ location, donationType, donationsLength }: HeaderProps)
 						<DialogDescription>Compartilhe suas ideias conosco.</DialogDescription>
 					</DialogHeader>
 					<SuggestionForm />
-					<DialogFooter className="sm:justify-start">
-						<DialogClose asChild>
-							<Button type="button" variant="secondary">
-								Fechar
-							</Button>
-						</DialogClose>
-					</DialogFooter>
 				</DialogContent>
 			</Dialog>
 		</header>

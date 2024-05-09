@@ -80,13 +80,13 @@ const Page = () => {
 					</Button>
 				</div>
 			</section>
-			<Dialog open={wannaHelpModalVisible}>
+			<Dialog open={wannaHelpModalVisible} onOpenChange={setWannaHelpModalVisible}>
 				<DialogContent className="sm:max-w-md">
 					<DialogHeader>
 						<DialogTitle>Sugestões</DialogTitle>
 						<DialogDescription>Compartilhe suas ideias conosco.</DialogDescription>
 					</DialogHeader>
-					<HelpForm />
+					<HelpForm handleOnSubmit={handleOnDonationType} />
 				</DialogContent>
 			</Dialog>
 		</>
