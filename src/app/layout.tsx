@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -17,6 +17,13 @@ export const metadata: Metadata = {
 	description: 'A simple donation platform for victims of the big flood in Rio Grande do Sul.',
 };
 
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	maximumScale: 1,
+	userScalable: false,
+};
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -24,14 +31,6 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<head>
-				<meta charSet="utf-8" />
-				{metadata.title && <title>{metadata.title.toString()}</title>}
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-				/>
-			</head>
 			<body
 				className={cn(
 					'flex min-h-screen flex-col items-center bg-background font-sans antialiased',

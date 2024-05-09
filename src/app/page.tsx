@@ -6,16 +6,11 @@ import { useQuery } from '@tanstack/react-query';
 import { addDonation, fetchDonations } from '@/queries/donations';
 import { Contact, DonationType } from '@/models/donation';
 import { Header } from '@/components/Header';
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { HelpForm } from '@/components/HelpForm';
 import { useToken } from '@/hooks/useToken';
 import { GetHelpForm } from '@/components/GetHelpForm';
+import Head from 'next/head';
 const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 	ssr: false, // This will only render on the client-side
 });
