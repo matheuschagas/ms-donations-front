@@ -11,6 +11,7 @@ import { HelpForm } from '@/components/HelpForm';
 import { useToken } from '@/hooks/useToken';
 import { GetHelpForm } from '@/components/GetHelpForm';
 import Head from 'next/head';
+import { toast } from '@/components/ui/use-toast';
 const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 	ssr: false, // This will only render on the client-side
 });
@@ -57,10 +58,15 @@ const Page = () => {
 	};
 
 	const handleOnGetHelp = async (data: { types: DonationType[]; contact: Contact }) => {
-		await addDonation({
+		setGetHelpModalVisible(false);
+		const donation = await addDonation({
 			queryKey: ['donations', location, data.types, data.contact, token],
 		});
-		setGetHelpModalVisible(false);
+		if (donation) {
+			toast('Ajuda', 'Pedido de ajuda enviado com sucesso!');
+		} else {
+			toast('Ajuda', 'Erro ao enviar pedido de ajuda');
+		}
 	};
 	return (
 		<>
