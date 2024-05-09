@@ -15,7 +15,9 @@ import {
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
 
 const FormSchema = z.object({
-	type: z.enum(Object.values(DonationType) as unknown as readonly [string, ...string[]]),
+	type: z.enum(Object.values(DonationType) as unknown as readonly [string, ...string[]], {
+		message: 'Selecione um tipo de doação',
+	}),
 });
 
 export function HelpForm({ handleOnSubmit }: { handleOnSubmit: (data: string) => any }) {
