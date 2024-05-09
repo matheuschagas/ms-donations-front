@@ -2,7 +2,7 @@ import { Donation, DonationType } from '@/models/donation';
 import { urlBuilder } from '@/lib/urlBuilder';
 
 interface fetchDonationParams {
-	queryKey: [string, GeolocationPosition, DonationType];
+	queryKey: [string, GeolocationPosition | undefined, DonationType | undefined];
 }
 export const fetchDonations = async ({
 	queryKey,
