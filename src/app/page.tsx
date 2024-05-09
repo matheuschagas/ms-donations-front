@@ -44,9 +44,7 @@ const Page = () => {
 		console.log(data);
 	}, [data]);
 
-	const handlePositionError = (error: GeolocationPositionError) => {
-		alert(JSON.stringify(location) + JSON.stringify(error));
-	};
+	const handlePositionError = (error: GeolocationPositionError) => {};
 
 	const handlePosition = (position: GeolocationPosition) => {
 		setLocation(position);
@@ -68,7 +66,6 @@ const Page = () => {
 		const donation = await addDonation({
 			queryKey: ['donations', location, data.types, data.contact, token],
 		});
-		alert(JSON.stringify(location));
 		if (donation) {
 			toast({ title: 'Ajuda', description: 'Pedido de ajuda enviado com sucesso!' });
 		} else {
