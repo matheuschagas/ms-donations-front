@@ -10,7 +10,7 @@ export const DonationTypeValues = {
 	[DonationType.WATER]: 'Água',
 };
 
-interface Contact {
+export interface Contact {
 	whatsapp: string;
 }
 export interface Donation {

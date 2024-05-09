@@ -26,9 +26,9 @@ export function HelpForm({ handleOnSubmit }: { handleOnSubmit: (data: string) =>
 		},
 	});
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		handleOnSubmit(data.type);
-	}
+	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+		await handleOnSubmit(data.type);
+	};
 
 	return (
 		<>

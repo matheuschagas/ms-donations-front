@@ -22,9 +22,9 @@ const Map = ({ location, donations }: MapProps) => {
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
-			{location ? (
-				<Marker position={[location.coords.latitude, location.coords.longitude]} />
-			) : null}
+			{/*{location ? (*/}
+			{/*	<Marker position={[location.coords.latitude, location.coords.longitude]} />*/}
+			{/*) : null}*/}
 			{donations?.map((donation, index) => (
 				<Marker key={index} position={[parseInt(donation.lat), parseInt(donation.long)]}>
 					<Popup>

@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchDonations } from '@/queries/donations';
-import { DonationType } from '@/models/donation';
+import { addDonation, fetchDonations } from '@/queries/donations';
+import { Contact, DonationType } from '@/models/donation';
 import { Header } from '@/components/Header';
 import {
 	Dialog,
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { HelpForm } from '@/components/HelpForm';
 import { useToken } from '@/hooks/useToken';
+import { GetHelpForm } from '@/components/GetHelpForm';
 const MapComponentWithNoSSR = dynamic(() => import('../components/Map'), {
 	ssr: false, // This will only render on the client-side
 });
@@ -49,9 +50,7 @@ const Page = () => {
 		setLocation(position);
 	};
 	const handleGetHelp = () => {
-		if (locationFeature) {
-		} else {
-		}
+		setGetHelpModalVisible(true);
 	};
 	const handleHelp = () => {
 		setWannaHelpModalVisible(true);
@@ -60,6 +59,13 @@ const Page = () => {
 	const handleOnDonationType = (donationType: string) => {
 		setDonationType(donationType as DonationType);
 		setWannaHelpModalVisible(false);
+	};
+
+	const handleOnGetHelp = async (data: { types: DonationType[]; contact: Contact }) => {
+		await addDonation({
+			queryKey: ['donations', location, data.types, data.contact, token],
+		});
+		setGetHelpModalVisible(false);
 	};
 	return (
 		<>
@@ -82,10 +88,17 @@ const Page = () => {
 			<Dialog open={wannaHelpModalVisible} onOpenChange={setWannaHelpModalVisible}>
 				<DialogContent className="sm:max-w-md">
 					<DialogHeader>
-						<DialogTitle>Sugestões</DialogTitle>
-						<DialogDescription>Compartilhe suas ideias conosco.</DialogDescription>
+						<DialogTitle>Quero ajudar</DialogTitle>
 					</DialogHeader>
 					<HelpForm handleOnSubmit={handleOnDonationType} />
+				</DialogContent>
+			</Dialog>
+			<Dialog open={getHelpModalVisible} onOpenChange={setGetHelpModalVisible}>
+				<DialogContent className="sm:max-w-md">
+					<DialogHeader>
+						<DialogTitle>Preciso de ajuda</DialogTitle>
+					</DialogHeader>
+					<GetHelpForm handleOnSubmit={handleOnGetHelp} />
 				</DialogContent>
 			</Dialog>
 		</>
