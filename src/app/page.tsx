@@ -30,7 +30,11 @@ const Page = () => {
 
 	useEffect(() => {
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(handlePosition, handlePositionError);
+			navigator.geolocation.getCurrentPosition(handlePosition, handlePositionError, {
+				enableHighAccuracy: true,
+				timeout: 5000,
+				maximumAge: 0,
+			});
 		} else {
 			setLocationFeature(false);
 		}
@@ -40,7 +44,9 @@ const Page = () => {
 		console.log(data);
 	}, [data]);
 
-	const handlePositionError = () => {};
+	const handlePositionError = (error: GeolocationPositionError) => {
+		alert(JSON.stringify(error));
+	};
 
 	const handlePosition = (position: GeolocationPosition) => {
 		setLocation(position);
