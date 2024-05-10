@@ -33,20 +33,23 @@ interface addDonationParams {
 		string | undefined,
 	];
 }
-export const addDonation = ({ queryKey }: addDonationParams): Promise<Donation> => {
+export const addDonation = async ({ queryKey }: addDonationParams): Promise<Donation> => {
 	const [_, location, donationTypes, contact, token] = queryKey;
 	if (!location || !donationTypes || !contact || !token) throw new Error('Missing data');
-	return fetch(urlBuilder({ path: 'donations', subdomain: 'donations' }), {
+	const body = JSON.stringify({
+		lat: location.coords.latitude,
+		long: location.coords.longitude,
+		types: donationTypes,
+		contact,
+	});
+	console.log(body);
+	const response = await fetch(urlBuilder({ path: 'donations', subdomain: 'donations' }), {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({
-			lat: location.coords.latitude,
-			long: location.coords.longitude,
-			types: donationTypes,
-			contact,
-		}),
-	}).then(async (response) => await response.json());
+		body,
+	});
+	return await response.json();
 };
