@@ -42,7 +42,7 @@ export const addDonation = async ({ queryKey }: addDonationParams): Promise<Dona
 		types: donationTypes,
 		contact,
 	});
-	console.log(body);
+	console.log('body from add donation', body);
 	const response = await fetch(urlBuilder({ path: 'donations', subdomain: 'donations' }), {
 		method: 'POST',
 		headers: {
