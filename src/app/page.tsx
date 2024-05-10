@@ -62,13 +62,14 @@ const Page = () => {
 	};
 
 	const handleOnGetHelp = async (data: { types: DonationType[]; contact: Contact }) => {
-		setGetHelpModalVisible(false);
-		const donation = await addDonation({
-			queryKey: ['donations', location, data.types, data.contact, token],
-		});
-		if (donation) {
+		try {
+			console.log(['donations', location, data.types, data.contact, token]);
+			setGetHelpModalVisible(false);
+			const donation = await addDonation({
+				queryKey: ['donations', location, data.types, data.contact, token],
+			});
 			toast({ title: 'Ajuda', description: 'Pedido de ajuda enviado com sucesso!' });
-		} else {
+		} catch (e: any) {
 			toast({ title: 'Ajuda', description: 'Erro ao enviar pedido de ajuda' });
 		}
 	};
