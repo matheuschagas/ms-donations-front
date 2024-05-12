@@ -21,7 +21,6 @@ export const viewport: Viewport = {
 	width: 'device-width',
 	initialScale: 1,
 	maximumScale: 1,
-	userScalable: false,
 };
 
 export default function RootLayout({
@@ -33,7 +32,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					'flex min-h-screen flex-col items-center bg-background font-sans antialiased',
+					'flex min-h-[100dvh] flex-col items-center bg-background font-sans antialiased',
 					fontSans.variable,
 				)}
 			>

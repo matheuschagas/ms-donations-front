@@ -40,10 +40,6 @@ const Page = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
-
 	const handlePositionError = (error: GeolocationPositionError) => {};
 
 	const handlePosition = (position: GeolocationPosition) => {
@@ -81,7 +77,7 @@ const Page = () => {
 				donationType={donationType}
 				donationsLength={data?.length}
 			/>
-			<section className="flex h-[calc(100vh-52px)] w-full flex-col items-center justify-center">
+			<section className="flex h-[calc(100dvh-52px)] w-full flex-col items-center justify-center">
 				<MapComponentWithNoSSR donations={data} location={location} />
 				<div className="fixed bottom-5 left-0 z-10 flex w-full flex-col items-center justify-center gap-4 p-4 sm:flex-row">
 					<Button onClick={handleHelp} size="lg">
