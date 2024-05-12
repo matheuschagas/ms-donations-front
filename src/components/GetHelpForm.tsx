@@ -103,7 +103,7 @@ export function GetHelpForm({
 						)}
 					/>
 					<DialogFooter className="sm:justify-start">
-						<Button type="submit">Solicitar</Button>
+						<Button type="submit">Ajudar</Button>
 						<DialogClose asChild>
 							<Button type="button" variant="secondary">
 								Fechar

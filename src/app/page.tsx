@@ -85,17 +85,17 @@ const Page = () => {
 				<MapComponentWithNoSSR donations={data} location={location} />
 				<div className="fixed bottom-5 left-0 z-10 flex w-full flex-col items-center justify-center gap-4 p-4 sm:flex-row">
 					<Button onClick={handleHelp} size="lg">
-						Quero ajudar
+						Preciso de ajuda
 					</Button>
 					<Button onClick={handleGetHelp} size="lg">
-						Preciso de ajuda
+						Quero ajudar
 					</Button>
 				</div>
 			</section>
 			<Dialog open={wannaHelpModalVisible} onOpenChange={setWannaHelpModalVisible}>
 				<DialogContent className="sm:max-w-md">
 					<DialogHeader>
-						<DialogTitle>Quero ajudar</DialogTitle>
+						<DialogTitle>Preciso de ajuda</DialogTitle>
 					</DialogHeader>
 					<HelpForm handleOnSubmit={handleOnDonationType} />
 				</DialogContent>
@@ -103,7 +103,7 @@ const Page = () => {
 			<Dialog open={getHelpModalVisible} onOpenChange={setGetHelpModalVisible}>
 				<DialogContent className="sm:max-w-md">
 					<DialogHeader>
-						<DialogTitle>Preciso de ajuda</DialogTitle>
+						<DialogTitle>Quero ajudar</DialogTitle>
 					</DialogHeader>
 					<GetHelpForm handleOnSubmit={handleOnGetHelp} />
 				</DialogContent>

@@ -47,7 +47,7 @@ export function HelpForm({ handleOnSubmit }: { handleOnSubmit: (data: string) =>
 										defaultValue={field.value}
 									>
 										<SelectTrigger className="w-full max-w-xl">
-											<SelectValue placeholder="Selecione como ajudar" />
+											<SelectValue placeholder="O que precisa?" />
 										</SelectTrigger>
 										<SelectContent>
 											{Object.keys(DonationType).map((item, index) => {
@@ -66,7 +66,7 @@ export function HelpForm({ handleOnSubmit }: { handleOnSubmit: (data: string) =>
 					/>
 
 					<DialogFooter className="sm:justify-start">
-						<Button type="submit">Ajudar</Button>
+						<Button type="submit">Procurar</Button>
 						<DialogClose asChild>
 							<Button type="button" variant="secondary">
 								Fechar
