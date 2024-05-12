@@ -9,6 +9,8 @@ interface fetchDonationParams {
 		string | undefined,
 	];
 }
+
+const coordsPrecision = 6;
 export const fetchDonations = async ({
 	queryKey,
 }: fetchDonationParams): Promise<Donation[] | null> => {
@@ -16,7 +18,7 @@ export const fetchDonations = async ({
 	if (!location || !donationType || !token) return null;
 	const response = await fetch(
 		urlBuilder({
-			path: `donations?lat=${location.coords.latitude}&long=${location.coords.longitude}&type=${donationType}`,
+			path: `donations?lat=${location.coords.latitude.toFixed(coordsPrecision)}&long=${location.coords.longitude.toFixed(coordsPrecision)}&type=${donationType}`,
 			subdomain: 'donations',
 		}),
 		{ method: 'GET', headers: { Authorization: `Bearer ${token}` } },
@@ -37,12 +39,11 @@ export const addDonation = async ({ queryKey }: addDonationParams): Promise<Dona
 	const [_, location, donationTypes, contact, token] = queryKey;
 	if (!location || !donationTypes || !contact || !token) throw new Error('Missing data');
 	const body = JSON.stringify({
-		lat: location.coords.latitude,
-		long: location.coords.longitude,
+		lat: parseFloat(location.coords.latitude.toFixed(coordsPrecision)),
+		long: parseFloat(location.coords.longitude.toFixed(coordsPrecision)),
 		types: donationTypes,
 		contact,
 	});
-	console.log('body from add donation', body);
 	const response = await fetch(urlBuilder({ path: 'donations', subdomain: 'donations' }), {
 		method: 'POST',
 		headers: {

@@ -1,5 +1,3 @@
-'use client';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -23,7 +21,11 @@ const FormSchema = z.object({
 	}),
 });
 
-export function SuggestionForm() {
+interface SuggestionFormProps {
+	handleSuggestion: (data: string) => any;
+}
+
+export function SuggestionForm({ handleSuggestion }: SuggestionFormProps) {
 	const { toast } = useToast();
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -33,11 +35,7 @@ export function SuggestionForm() {
 	});
 
 	function onSubmit(data: z.infer<typeof FormSchema>) {
-		console.log(data);
-		toast({
-			title: 'Obrigado!',
-			description: <span>Sua sugestão será avaliada pelo nosso time.</span>,
-		});
+		handleSuggestion(data.description);
 	}
 
 	return (

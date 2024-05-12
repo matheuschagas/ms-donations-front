@@ -68,6 +68,7 @@ const Page = () => {
 			const donation = await addDonation({
 				queryKey: ['donations', location, data.types, data.contact, token],
 			});
+			if (!donation._id) throw new Error('Missing data');
 			toast({ title: 'Ajuda', description: 'Pedido de ajuda enviado com sucesso!' });
 		} catch (e: any) {
 			toast({ title: 'Ajuda', description: 'Erro ao enviar pedido de ajuda' });
