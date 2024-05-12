@@ -63,7 +63,6 @@ const Page = () => {
 
 	const handleOnGetHelp = async (data: { types: DonationType[]; contact: Contact }) => {
 		try {
-			console.log(['donations', location, data.types, data.contact, token]);
 			setGetHelpModalVisible(false);
 			const donation = await addDonation({
 				queryKey: ['donations', location, data.types, data.contact, token],
