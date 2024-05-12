@@ -1,13 +1,19 @@
 import { urlBuilder } from '@/lib/urlBuilder';
 import { Suggestion } from '@/models/suggestion';
+import { Token } from '@/models/token';
 
 interface AddSuggestionParams {
-	queryKey: [string, Suggestion];
+	queryKey: [string, Suggestion, string | undefined];
 }
-export const addSuggestion = ({ queryKey }: AddSuggestionParams): Promise<Suggestion> => {
-	const suggestion = queryKey[1];
-	return fetch(urlBuilder({ path: 'suggestions', subdomain: 'suggestions' }), {
+export const addSuggestion = async ({ queryKey }: AddSuggestionParams): Promise<Suggestion> => {
+	const [_, suggestion, token] = queryKey;
+	const response = await fetch(urlBuilder({ path: 'suggestions', subdomain: 'suggestions' }), {
 		method: 'POST',
 		body: JSON.stringify(suggestion),
-	}).then(async (response) => await response.json());
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return await response.json();
 };

@@ -16,8 +16,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
 
 const FormSchema = z.object({
-	description: z.string().min(3, {
-		message: 'Descrição precisa ser maior que 3 caracteres.',
+	description: z.string().min(32, {
+		message: 'Precisa ser maior que 32 caracteres.',
 	}),
 });
 

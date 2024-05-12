@@ -76,6 +76,7 @@ const Page = () => {
 	return (
 		<>
 			<Header
+				token={token}
 				location={location}
 				donationType={donationType}
 				donationsLength={data?.length}

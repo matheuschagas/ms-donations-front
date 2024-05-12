@@ -13,6 +13,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { SuggestionForm } from '@/components/SuggestionForm';
 import { toast } from '@/components/ui/use-toast';
+import { addSuggestion } from '@/queries/suggestions';
+import { Token } from '@/models/token';
 
 export enum ViewMode {
 	MAP,
@@ -23,14 +25,26 @@ interface HeaderProps {
 	donationType: DonationType | undefined;
 	donationsLength: number | undefined;
 	mode?: ViewMode;
+	token: string | undefined;
 }
-export const Header = ({ location, donationType, donationsLength }: HeaderProps) => {
+export const Header = ({ location, donationType, donationsLength, token }: HeaderProps) => {
 	const [suggestionModalVisible, setSuggestionModalVisible] = useState(false);
-	const handleSuggestion = () => {
-		toast({
-			title: 'Obrigado!',
-			description: <span>Sua sugestão será avaliada pelo nosso time.</span>,
-		});
+	const handleSuggestion = async (description: string) => {
+		try {
+			const suggestion = await addSuggestion({
+				queryKey: ['suggestions', { description }, token],
+			});
+			if (!suggestion._id) throw new Error('Something went wrong.');
+			toast({
+				title: 'Obrigado!',
+				description: <span>Sua sugestão será avaliada pelo nosso time.</span>,
+			});
+		} catch (error) {
+			toast({
+				title: 'Erro',
+				description: <span>Não foi possível enviar sua sugestão.</span>,
+			});
+		}
 	};
 	return (
 		<header className="flex w-full items-center justify-between bg-gray-800 p-4 text-white">
